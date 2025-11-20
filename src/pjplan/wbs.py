@@ -6,7 +6,7 @@ from pjplan.task import Task, EMPTY_TASK_ID, _ChildrenList, _ImmutableTaskList, 
 
 
 class WBS:
-    """Work Burn-down Structure"""
+    """Work Breakdown Structure"""
 
     # noinspection PyProtectedMember
     def __init__(self, tasks: Iterable[Task] = None, **kwargs):
