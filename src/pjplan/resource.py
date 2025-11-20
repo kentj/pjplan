@@ -6,31 +6,31 @@ from pjplan import IWorkCalendar, DEFAULT_CALENDAR, Task
 
 
 class IResource(ABC):
-    """Ресурс - человек, машина или любая другая сущность, которая необходима для выполнения работы (Task)"""
+    """A resource is a person, machine, or any other entity that is necessary to perform work (Task)"""
 
     def __init__(self, name: str):
         """
-        :param name: уникальное название ресурса.
+        :param name: Unique Resource Name
         """
         self.name = name
 
     @abstractmethod
     def get_available_units(self, date: datetime, task: Optional[Task] = None) -> float:
         """
-        Возвращает количество доступных рабочих часов ресурса в указанную дату
-        :param date: дата
-        :param task: задача, под которую нужны ресурсы. None, если конкретной задачи нет
-        :return: количество доступных часов ресурса
+        Returns the number of available working hours of a resource on a specified date
+        :param date: date
+        :param task: a task that requires resources. None, if there is no specific task
+        :return: number of available resource hours
         """
         pass
 
     def get_nearest_availability_date(self, start_date: datetime, direction: int, max_days=100000) -> datetime:
         """
-        Возвращает ближайшую дату доступности ресурса, начиная со start_date
-        :param direction: 1 или -1
-        :param start_date: дата начала поиска
-        :param max_days: максимальный интервал поиска (в днях)
-        :return: дата доступности
+        Returns the nearest date of resource availability, starting from 'start_date'
+        :param direction: 1 or -1
+        :param start_date: search start date
+        :param max_days: maximum search interval (in days)
+        :return: availability date
         """
         step = 0
         while step < max_days:
@@ -60,15 +60,15 @@ class Resource(IResource):
             calendar: IWorkCalendar = DEFAULT_CALENDAR
     ):
         """
-        :param name: уникальное наименование ресурса
-        :param calendar: рабочий календарь
+        :param name: unique resource name
+        :param calendar: work calendar
 
-        Пример интервалов доступности:
+        Example of availability intervals:
         availability = [(datetime(2000, 1, 1), 50), (datetime(2000, 2, 1), 100)]
-        означает, что:
-        1. До 2000-01-01 ресурс недоступен
-        2. В период с 2000-01-01 по 2000-02-01 ресурс доступен на 50%
-        3. После 2000-02-01 ресурс доступен на 100%
+        means that:
+        1. Until 2000-01-01, the resource is unavailable
+        2. From 2000-01-01 to 2000-02-01, the resource is 50% available
+        3. After 2000-02-01, the resource is 100% available
         """
         super().__init__(name)
         self.calendar = calendar
