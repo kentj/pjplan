@@ -1,5 +1,5 @@
 """
-Пакет содержит API для работы с проектами и расписаниями задач.
+The package contains an API for working with projects and task schedules.
 """
 from pjplan.wbs import Task, WBS
 from pjplan.calendar import IWorkCalendar, WeeklyCalendar, DirectCalendar, FixedCalendar, DEFAULT_CALENDAR
