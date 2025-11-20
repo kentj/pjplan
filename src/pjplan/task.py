@@ -853,7 +853,7 @@ class Task:
             for pr in t.predecessors:
                 yield pr
                 yield from get_predecessor(pr)
-        # TODO поиск предшественников не оптимальный, много дублей, надо оптимизировать
+        # TODO The search for predecessors is not optimal, there are many duplicates, it needs to be optimized.
         return _unique_tasks(get_predecessor(self))
 
     @property
@@ -900,7 +900,7 @@ class Task:
                 yield pr
                 yield from get_successor(pr)
 
-        # TODO поиск последователей не оптимальный, много дублей, надо оптимизировать
+        # TODO The search for followers is not optimal, there are many duplicates, it needs to be optimized
         return _unique_tasks(get_successor(self))
 
     def to_dict(self) -> dict:
@@ -937,7 +937,7 @@ class Task:
         return other
 
     def __rshift__(self, other: Union['Task', Iterable['Task']]):
-        """Synonym for successors.append(other) или successors += other"""
+        """Synonym for successors.append(other) or successors += other"""
         self.successors += other
         return other
 
